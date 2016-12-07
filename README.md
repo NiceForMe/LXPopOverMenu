@@ -19,4 +19,5 @@ LXPopOverMenu是一款非常容易调用的上拉(下拉)菜单，支持设置�
 欢迎iOSers提出宝贵的意见，也欢迎各位大牛批评指正，喜欢的朋友点个star
 # Discussing
 - email:771717844@qq.com
+- [sina weibo](http://weibo.com/2759926645/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1)
 - [submit issues](https://github.com/NiceForMe/LXPopOverMenu/issues)
