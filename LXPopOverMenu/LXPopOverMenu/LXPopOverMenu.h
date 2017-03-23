@@ -62,8 +62,8 @@ typedef NS_ENUM(NSUInteger,CellModel){
 @property (nonatomic,strong) UITableView *menuTableView;
 @property (nonatomic,strong) NSMutableArray *nameArray;
 @property (nonatomic,strong) NSMutableArray *imageArray;
-@property (nonatomic,assign) LXPopOverMenuDoneBlock doneBlock;
-@property (nonatomic,assign) LXPopOverMenuDismiss dismissBlock;
+@property (nonatomic,copy) LXPopOverMenuDoneBlock doneBlock;
+@property (nonatomic,copy) LXPopOverMenuDismiss dismissBlock;
 /**
  *  show menu with view with nameArray and imageArray
  *

@@ -28,6 +28,8 @@
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
 
+static NSString *ID = @"Identifier";
+
 @interface LXPopOverMenu ()
 @property (nonatomic,assign) BOOL menuIsExist;
 @property (nonatomic,strong) LXPopOverMenuTableView *tableView;
@@ -79,7 +81,6 @@
 @implementation LXPopOverMenuTableViewCell
 + (instancetype)cellWithTableView:(UITableView *)tableView cellModel:(CellModel)cellModel
 {
-    static NSString *ID = @"Identifier";
     LXPopOverMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (!cell) {
         cell = [[LXPopOverMenuTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID cellModel:cellModel];
@@ -153,6 +154,7 @@
 @property (nonatomic,strong) UIView *backgroundView;//背景视图，给它添加了手势，作用在于点击这个视图让menu消失
 @property (nonatomic,strong) UIBezierPath *path;
 @property (nonatomic,strong) CALayer *menuLayer;
+@property (nonatomic,assign) NSInteger cellCount;
 @end
 
 @implementation LXPopOverMenuTableView
@@ -192,6 +194,9 @@
 }
 - (void)showTableViewWithSuperView:(UIView *)superView menuCellNameArray:(NSArray<NSString *> *)nameArray imageNameArray:(NSArray<NSString *> *)imageNameArray menuDirection:(LXPopOverMenuDirection)direction doneBlock:(LXPopOverMenuDoneBlock)doneBlock dismissBlock:(LXPopOverMenuDismiss)dismissBlock
 {
+    if (self.menuTableView) {
+        self.menuTableView = nil;
+    }
     if (imageNameArray.count == 0) {
         self.isIcon = NO;
     }else{
@@ -202,8 +207,9 @@
     CGFloat leftMargin = CGRectGetMaxX(superView.frame) - superView.frame.size.width / 2 - MenuWidth / 2;
     CGFloat bottomMargin = CGRectGetMaxY(superView.frame) + MenuSmallMargin + MenuArrowHeight + nameArray.count * MenuTableViewRowHeight;
     CGFloat topMargin = CGRectGetMinY(superView.frame) - MenuSmallMargin - MenuArrowHeight - nameArray.count * MenuTableViewRowHeight;
+    self.doneBlock = doneBlock;
+    NSLog(@"self.doneBlock的地址%p",self.doneBlock);
     if (self.menuIsExist == NO) {
-        self.doneBlock = doneBlock;
         self.dismissBlock = dismissBlock;
         self.nameArray = [NSMutableArray arrayWithArray:nameArray];
         self.imageArray = [NSMutableArray arrayWithArray:imageNameArray];
@@ -303,10 +309,6 @@
     [self.layer addSublayer:layer];
 }
 //datasource and delegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.nameArray.count;

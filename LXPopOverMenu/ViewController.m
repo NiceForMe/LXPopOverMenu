@@ -12,6 +12,8 @@
 @interface ViewController ()
 @property (nonatomic,strong) NSMutableArray *nameArray;
 @property (nonatomic,strong) NSMutableArray *imgArray;
+@property (nonatomic,strong) NSMutableArray *secondNameArray;
+@property (nonatomic,strong) NSMutableArray *secondImgArray;
 @property (nonatomic,strong) UIButton *downBtn;
 @property (nonatomic,strong) UIButton *upBtn;
 @property (nonatomic,strong) UIButton *navBtn;
@@ -21,16 +23,30 @@
 - (NSMutableArray *)nameArray
 {
     if (!_nameArray) {
-        _nameArray = [NSMutableArray arrayWithArray:@[@"Wo",@"Jiao",@"Li",@"Xiao",@"Wo",@"Jiao",@"Li",@"Xiao",@"Wo",@"Jiao",@"Li",@"Xiao"]];
+        _nameArray = [NSMutableArray arrayWithArray:@[@"Wo",@"Jiao",@"Li",@"Xiao"]];
     }
     return _nameArray;
 }
 - (NSMutableArray *)imgArray
 {
     if (!_imgArray) {
-        _imgArray = [NSMutableArray arrayWithArray:@[@"example",@"example",@"example",@"example",@"example",@"example",@"example",@"example",@"example",@"example",@"example",@"example"]];
+        _imgArray = [NSMutableArray arrayWithArray:@[@"example",@"example",@"example",@"example"]];
     }
     return _imgArray;
+}
+- (NSMutableArray *)secondNameArray
+{
+    if (!_secondNameArray) {
+        _secondNameArray = [NSMutableArray arrayWithArray:@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8"]];
+    }
+    return _secondNameArray;
+}
+- (NSMutableArray *)secondImgArray
+{
+    if (!_secondImgArray) {
+        _secondImgArray = [NSMutableArray arrayWithArray:@[@"example",@"example",@"example",@"example",@"example",@"example",@"example",@"example"]];
+    }
+    return _secondImgArray;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,7 +96,7 @@
 }
 - (void)showNavMenu
 {
-    [LXPopOverMenu showPopOverMenu:self.navBtn withMenuCellNameArray:self.nameArray imageNameArray:self.imgArray menuDirection:PopOverMenuDownDirection doneBlock:^(NSInteger selectIndex) {
+    [LXPopOverMenu showPopOverMenu:self.navBtn withMenuCellNameArray:self.secondNameArray imageNameArray:self.secondImgArray menuDirection:PopOverMenuDownDirection doneBlock:^(NSInteger selectIndex) {
         NSLog(@"%ld",(long)selectIndex);
     } dismissBlock:^{
         
